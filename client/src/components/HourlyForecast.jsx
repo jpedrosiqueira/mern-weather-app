@@ -23,6 +23,9 @@ export const HourlyForecast = ({
     }
   };
 
+  // Finds what weather icon to use based on the weather description fetched from API.
+  // For the hourly forecast icon, we care about each hour, because icons
+  // can change dynamically based on if it will be day or night at that time.
   const findHourlyForecastIcon = (hourlyWeather) => {
     let weatherIcon;
     const hourlyTime = hourlyWeather.dt;
@@ -46,6 +49,7 @@ export const HourlyForecast = ({
 
   return (
     <>
+      {/* Only render hourly forecast if there is data to display */}
       {allHourlyWeatherArray.length ? (
         <div
           className={`hourly-forecast-container ${hasDarkBgClass && "dark"}`}

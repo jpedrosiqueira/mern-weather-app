@@ -20,7 +20,6 @@ class WeatherApp extends React.Component {
     super(props);
     this.state = {
       weatherData: {},
-      zipcode: "",
       cityName: "Winterfell",
       currentTemp: 16,
       highTemp: 23,
@@ -38,6 +37,7 @@ class WeatherApp extends React.Component {
     };
   }
 
+  // Based on Searchbar input, fetch data from our API
   fetchWeatherData = async (searchbarInput) => {
     const body = { cityName: searchbarInput, unit: this.state.unit };
 
@@ -60,6 +60,7 @@ class WeatherApp extends React.Component {
       .catch((err) => console.log(err.response.data));
   };
 
+  // On submit, fetch our data based on the input.
   handleSubmit = (searchbarInput) => {
     this.fetchWeatherData(searchbarInput).then(() => {
       const forecastData = this.state.forecastData;
@@ -73,6 +74,8 @@ class WeatherApp extends React.Component {
         currentTime: forecastData.current.dt,
         timezone: forecastData.timezone,
       });
+      // After some information from state has been set,
+      // set more information based on those.
       this.setState({
         inputField: searchbarInput,
         isCurrentlyDay: isDay(
@@ -90,6 +93,7 @@ class WeatherApp extends React.Component {
     });
   };
 
+  // Fetch from API when the temperature unit changes
   fetchNewTemperatures = () => {
     this.fetchWeatherData(this.state.cityName).then(() => {
       const forecastData = this.state.forecastData;
@@ -118,6 +122,7 @@ class WeatherApp extends React.Component {
     const isDynamicForecastBackground = isDarkForecastBg(this.state.background);
     const isDynamicTextColor = isDarkTextColorBg(this.state.background);
 
+    // Set the app background based on the current weather
     let backgroundStyle = {
       backgroundImage: `url(${this.state.background}`,
       backgroundSize: "cover",

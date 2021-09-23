@@ -14,6 +14,8 @@ import SnowBg from "../assets/backgrounds/snow.jpeg";
 import CloudsBg from "../assets/backgrounds/clouds.jpeg";
 import HazeBg from "../assets/backgrounds/haze.jpeg";
 
+// Where we store weather icons and background images.
+// Note that some weathers are dynamic, having a different asset for day and night.
 export const WeatherAssets = {
   thunderstorm: {
     icon: ThunderstormIcon,
@@ -68,6 +70,9 @@ export const findDailyForecastIcon = (weatherDescription) => {
   return weatherIcon;
 };
 
+// Finds what background image will be displayed based on the weather description.
+// It also needs to know if is currently day, since some backgrounds change
+// dynamically when it is day or night.
 export const findBackgroundImg = (weatherDescription, isCurrentlyDay) => {
   let weatherBackground;
   const DayOrNightKey = isCurrentlyDay ? "day" : "night";
@@ -100,19 +105,28 @@ export const isDarkForecastBg = (bgImg) => {
 };
 
 // Helper function that checks if we need to switch to a darker
-// Text color (DayOrNight Icon, City name, etc) depending on the weather background
+// Text color (DayOrNight Icon, City name, etc) depending on the weather background.
 export const isDarkTextColorBg = (bgImg) => {
+  // So far, only Snow background needs a text and icon color change.
   return bgImg.includes("snow");
 };
 
 /**
-    Text, DayOrNightIcon, and/or forecast containers that will change to a darker color:
+Some clarifying information:
 
-      Darker Daily/Hourly Forecast Container:
+    1) Text, DayOrNightIcon, and/or forecast containers that will change to a darker color:
+
+      a) Needs a darker Daily/Hourly Forecast Container:
         - Snow Background Image
         - Clouds Background Image
         - Haze Background Image
         - Rain Day Background Image
-      Darker Text Color and DayOrNightIcon:
+      b) Needs a darker Text Color and DayOrNightIcon:
         - Snow Background Image
+
+
+    2) Based on OpenWeatherAPI, some weather descriptions fall under "Atmosphere group",
+    which are Haze, Smoke, Fog, Mist, etc. For this project, all descriptions that fall
+    under this category, will be set as "Other" in our WeatherAssets.
+    
  */

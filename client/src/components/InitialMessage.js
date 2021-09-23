@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/initial-message.css";
 
+// A message component that will be displayed only on the initial page,
+// when there's no data to display.
 export const InitialMessage = () => {
   return (
     <div className="initial-message-container">

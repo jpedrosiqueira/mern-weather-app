@@ -13,12 +13,13 @@ export const ToggleUnit = ({ changeUnit }) => {
 
   return (
     <div className="button-container">
+      {/* Buttons will have an "active" style based on if was selected or not */}
       <button
         onClick={handleClick}
         value="imperial"
         label="farenheit"
         className={`toggle-button farenheit ${
-          isActive === "imperial" ? "active" : ""
+          isActive === "imperial" && "active"
         }`}
       >
         ºF
@@ -27,9 +28,7 @@ export const ToggleUnit = ({ changeUnit }) => {
         onClick={handleClick}
         value="metric"
         label="celsius"
-        className={`toggle-button celsius ${
-          isActive === "metric" ? "active" : ""
-        }`}
+        className={`toggle-button celsius ${isActive === "metric" && "active"}`}
       >
         ºC
       </button>
