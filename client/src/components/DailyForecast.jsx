@@ -2,11 +2,11 @@ import React from "react";
 import moment from "moment";
 import "../styles/daily-forecast.css";
 import { findDailyForecastIcon } from "./WeatherAssets";
+import { InitialMessage } from "./InitialMessage";
 
 export const DailyForecast = ({ allDailyWeatherArray, hasDarkBgClass }) => {
   // We only care about the 6 next days forecast,
   // excluding the first index which is today.
-
   const dailyWeatherArray = allDailyWeatherArray.slice(1, 7);
 
   // The time fetched from API is in Unix time, here we convert
@@ -40,7 +40,8 @@ export const DailyForecast = ({ allDailyWeatherArray, hasDarkBgClass }) => {
           })}
         </div>
       ) : (
-        <div></div>
+        // Show initial message if there is no forecast to display
+        <InitialMessage />
       )}
     </>
   );

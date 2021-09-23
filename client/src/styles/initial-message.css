@@ -1,0 +1,12 @@
+.initial-message-container {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 24px;
+  color: #ffff;
+  padding: 3vh;
+}
+p,
+li {
+  font-size: 14px;
+  line-height: 2;
+  list-style: url("../assets/icons/wind.svg");
+}
