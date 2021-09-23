@@ -8,6 +8,10 @@
   border-radius: 24px;
 }
 
+.hourly-forecast-container.dark {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .single-hour-container {
   display: flex;
   flex-direction: column;

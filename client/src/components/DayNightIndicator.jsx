@@ -1,6 +1,7 @@
 import React from "react";
 import MoonIcon from "../assets/icons/moon.svg";
 import SunIcon from "../assets/icons/sun.svg";
+import "../styles/day-night-icon.css";
 
 // Returns if currently is Daytime,
 // based on sunset and sunrise times.
@@ -11,14 +12,14 @@ export const isDay = (time, sunset, sunrise) => {
   }
 };
 
-export const IsDayOrNightIcon = ({ isCurrentlyDay }) => {
+export const IsDayOrNightIcon = ({ isCurrentlyDay, hasDarkBgClass }) => {
   const icon = isCurrentlyDay ? SunIcon : MoonIcon;
 
   return (
     <img
       src={icon}
       alt="day-night-icon"
-      style={{ height: "40px", width: "40px" }}
+      className={`${hasDarkBgClass && "dark"}`}
     />
   );
 };

@@ -24,7 +24,7 @@ export const SearchBar = ({ onSubmit }) => {
           type="text"
           value={inputField}
           className="search-bar-input"
-          placeholder="Type in a zip code..."
+          placeholder="Type in a city name..."
         />
       </form>
     </div>

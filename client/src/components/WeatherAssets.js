@@ -87,3 +87,32 @@ export const findBackgroundImg = (weatherDescription, isCurrentlyDay) => {
 
   return weatherBackground;
 };
+
+// Helper function that checks if we need to switch to a darker
+// Daily/Hourly Forecast Container depending on the weather background
+export const isDarkForecastBg = (bgImg) => {
+  return (
+    bgImg.includes("snow") ||
+    bgImg.includes("rain-day") ||
+    bgImg.includes("clouds") ||
+    bgImg.includes("haze")
+  );
+};
+
+// Helper function that checks if we need to switch to a darker
+// Text color (DayOrNight Icon, City name, etc) depending on the weather background
+export const isDarkTextColorBg = (bgImg) => {
+  return bgImg.includes("snow");
+};
+
+/**
+    Text, DayOrNightIcon, and/or forecast containers that will change to a darker color:
+
+      Darker Daily/Hourly Forecast Container:
+        - Snow Background Image
+        - Clouds Background Image
+        - Haze Background Image
+        - Rain Day Background Image
+      Darker Text Color and DayOrNightIcon:
+        - Snow Background Image
+ */

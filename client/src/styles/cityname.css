@@ -8,3 +8,7 @@
   align-items: center;
   color: #ffffff;
 }
+
+.title.dark {
+  color: #4f4f4f;
+}

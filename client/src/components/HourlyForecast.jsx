@@ -6,6 +6,7 @@ import { isDay } from "./DayNightIndicator";
 
 export const HourlyForecast = ({
   allHourlyWeatherArray,
+  hasDarkBgClass,
   currTemp,
   timezone,
   sunset,
@@ -46,7 +47,9 @@ export const HourlyForecast = ({
   return (
     <>
       {allHourlyWeatherArray.length ? (
-        <div className="hourly-forecast-container">
+        <div
+          className={`hourly-forecast-container ${hasDarkBgClass && "dark"}`}
+        >
           {hourlyWeatherArray.map((hourlyWeather, idx) => {
             let hour;
             const icon = findHourlyForecastIcon(hourlyWeather);

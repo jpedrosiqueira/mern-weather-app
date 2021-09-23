@@ -3,7 +3,7 @@ import moment from "moment";
 import "../styles/daily-forecast.css";
 import { findDailyForecastIcon } from "./WeatherAssets";
 
-export const DailyForecast = ({ allDailyWeatherArray }) => {
+export const DailyForecast = ({ allDailyWeatherArray, hasDarkBgClass }) => {
   // We only care about the 6 next days forecast,
   // excluding the first index which is today.
 
@@ -18,7 +18,7 @@ export const DailyForecast = ({ allDailyWeatherArray }) => {
   return (
     <>
       {allDailyWeatherArray.length ? (
-        <div className="daily-forecast-container">
+        <div className={`daily-forecast-container ${hasDarkBgClass && "dark"}`}>
           {dailyWeatherArray.map((weatherDay) => {
             const weekday = convertUnixToWeekday(weatherDay.dt);
             const minTemp = Math.round(weatherDay.temp.min);
@@ -32,8 +32,8 @@ export const DailyForecast = ({ allDailyWeatherArray }) => {
                 <span>{weekday}</span>
                 <img src={icon} alt="weather-icon" />
                 <div className="weekday-temp">
-                  <span>{minTemp}º</span>
                   <span>{maxTemp}º</span>
+                  <span>{minTemp}º</span>
                 </div>
               </div>
             );

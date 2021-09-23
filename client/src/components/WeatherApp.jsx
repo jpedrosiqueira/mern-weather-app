@@ -6,7 +6,11 @@ import { SearchBar } from "./Searchbar";
 import "../styles/weather-app.css";
 import { HourlyForecast } from "./HourlyForecast";
 import { DailyForecast } from "./DailyForecast";
-import { findBackgroundImg } from "./WeatherAssets";
+import {
+  findBackgroundImg,
+  isDarkForecastBg,
+  isDarkTextColorBg,
+} from "./WeatherAssets";
 import SnowBg from "../assets/backgrounds/snow.jpeg";
 import { isDay, IsDayOrNightIcon } from "./DayNightIndicator";
 import { ToggleUnit } from "./ToggleUnit";
@@ -35,22 +39,25 @@ class WeatherApp extends React.Component {
   }
 
   fetchWeatherData = async (searchbarInput) => {
-    const body = { zipCodeInput: searchbarInput, unit: this.state.unit };
+    const body = { cityName: searchbarInput, unit: this.state.unit };
 
-    await axios.post("/search-location", body).then((res) => {
-      console.log("this is the response", res);
+    await axios
+      .post("/search-location", body)
+      .then((res) => {
+        console.log("this is the response", res);
 
-      // We only need city name, high temperature and low from
-      // the currentWeather data fetched
-      const currentWeatherData = res.data.currentWeatherData;
+        // We only need city name, high temperature and low from
+        // the currentWeather data fetched
+        const currentWeatherData = res.data.currentWeatherData;
 
-      this.setState({
-        cityName: currentWeatherData.name,
-        highTemp: currentWeatherData.main.temp_max,
-        lowTemp: currentWeatherData.main.temp_min,
-        forecastData: res.data.forecastData,
-      });
-    });
+        this.setState({
+          cityName: currentWeatherData.name,
+          highTemp: currentWeatherData.main.temp_max,
+          lowTemp: currentWeatherData.main.temp_min,
+          forecastData: res.data.forecastData,
+        });
+      })
+      .catch((err) => console.log(err.response.data));
   };
 
   handleSubmit = (searchbarInput) => {
@@ -67,7 +74,7 @@ class WeatherApp extends React.Component {
         timezone: forecastData.timezone,
       });
       this.setState({
-        zipcode: searchbarInput,
+        inputField: searchbarInput,
         isCurrentlyDay: isDay(
           this.state.currentTime,
           this.state.sunsetTime,
@@ -84,7 +91,7 @@ class WeatherApp extends React.Component {
   };
 
   fetchNewTemperatures = () => {
-    this.fetchWeatherData(this.state.zipcode).then(() => {
+    this.fetchWeatherData(this.state.cityName).then(() => {
       const forecastData = this.state.forecastData;
       this.setState({
         currentTemp: forecastData.current.temp,
@@ -95,23 +102,29 @@ class WeatherApp extends React.Component {
   };
 
   handleChangeUnit = (unitSelected) => {
-    this.setState(
-      {
-        unit: unitSelected,
-      },
-      this.fetchNewTemperatures
-    );
+    // To avoid fetching the data when clicking on a unit
+    // that has been already selected, here we only fetch new
+    // data if the unit selected is different than current unit
+    unitSelected !== this.state.unit &&
+      this.setState(
+        {
+          unit: unitSelected,
+        },
+        this.fetchNewTemperatures
+      );
   };
 
   render() {
+    const isDynamicForecastBackground = isDarkForecastBg(this.state.background);
+    const isDynamicTextColor = isDarkTextColorBg(this.state.background);
+
+    let backgroundStyle = {
+      backgroundImage: `url(${this.state.background}`,
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+    };
     return (
-      <div
-        style={{
-          backgroundImage: `url(${this.state.background}`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
+      <div style={backgroundStyle}>
         <div className="container">
           <div className="header-container">
             <div className="search-bar">
@@ -121,16 +134,23 @@ class WeatherApp extends React.Component {
               <ToggleUnit changeUnit={this.handleChangeUnit} />
             </div>
             <div className="day-night-icon">
-              <IsDayOrNightIcon isCurrentlyDay={this.state.isCurrentlyDay} />
+              <IsDayOrNightIcon
+                isCurrentlyDay={this.state.isCurrentlyDay}
+                hasDarkBgClass={isDynamicTextColor}
+              />
             </div>
           </div>
           <div className="city-dailyforecast-content">
             <div className="city-name">
-              <CityName name={this.state.cityName} />
+              <CityName
+                name={this.state.cityName}
+                hasDarkBgClass={isDynamicTextColor}
+              />
             </div>
             <div className="daily-forecast">
               <DailyForecast
                 allDailyWeatherArray={this.state.allDailyWeather}
+                hasDarkBgClass={isDynamicForecastBackground}
               />
             </div>
           </div>
@@ -138,7 +158,8 @@ class WeatherApp extends React.Component {
             <div className="current-temp">
               <CurrentTemp
                 temperature={this.state.currentTemp}
-                description={this.state.weatherDescription}
+                weatherDescription={this.state.weatherDescription}
+                hasDarkBgClass={isDynamicTextColor}
                 high={this.state.highTemp}
                 low={this.state.lowTemp}
               />
@@ -146,6 +167,7 @@ class WeatherApp extends React.Component {
             <div className="hourly-forecast">
               <HourlyForecast
                 allHourlyWeatherArray={this.state.allHourlyWeather}
+                hasDarkBgClass={isDynamicForecastBackground}
                 currTemp={this.state.currentTemp}
                 currentTime={this.state.currentTime}
                 sunset={this.state.sunsetTime}
