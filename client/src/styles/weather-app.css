@@ -1,0 +1,84 @@
+.container {
+  display: grid;
+  margin: 0 4vw;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 0.5fr 1.5fr;
+  gap: 0 12vw;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "header-content header-content"
+    "city-dailyforecast-content temp-hourlyforecast-content";
+}
+
+.header-container {
+  display: grid;
+  grid-template-columns: 2.2fr 0.4fr 0.4fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "search-bar toggle-button-container day-night-icon";
+  grid-area: header-content;
+  align-items: center;
+}
+
+.search-bar {
+  grid-area: search-bar;
+}
+
+.toggle-button-container {
+  grid-area: toggle-button-container;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.day-night-icon {
+  grid-area: day-night-icon;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.city-dailyforecast-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "city-name"
+    "daily-forecast";
+  grid-area: city-dailyforecast-content;
+}
+
+.city-name {
+  grid-area: city-name;
+}
+
+.daily-forecast {
+  grid-area: daily-forecast;
+  display: flex;
+  align-items: center;
+}
+
+.temp-hourlyforecast-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "current-temp"
+    "hourly-forecast";
+  grid-area: temp-hourlyforecast-content;
+}
+
+.current-temp {
+  grid-area: current-temp;
+  display: flex;
+  justify-content: center;
+}
+
+.hourly-forecast {
+  grid-area: hourly-forecast;
+  display: grid;
+  align-items: center;
+}

@@ -1,0 +1,32 @@
+.currenttemp-container {
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  align-items: center;
+  font-style: normal;
+  font-weight: normal;
+  width: 320px;
+}
+.temperature {
+  font-size: 144px;
+  line-height: 196px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.weather-description {
+  font-size: 24px;
+}
+
+.high-and-low {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
+}
+.high-and-low span {
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+}

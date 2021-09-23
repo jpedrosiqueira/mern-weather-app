@@ -1,0 +1,47 @@
+import React from "react";
+import moment from "moment";
+import "../styles/daily-forecast.css";
+import { findDailyForecastIcon } from "./WeatherAssets";
+
+export const DailyForecast = ({ allDailyWeatherArray }) => {
+  // We only care about the 6 next days forecast,
+  // excluding the first index which is today.
+
+  const dailyWeatherArray = allDailyWeatherArray.slice(1, 7);
+
+  // The time fetched from API is in Unix time, here we convert
+  // it to a weekday format like "Monday"
+  const convertUnixToWeekday = (unixTime) => {
+    return moment.unix(unixTime).format("dddd");
+  };
+
+  return (
+    <>
+      {allDailyWeatherArray.length ? (
+        <div className="daily-forecast-container">
+          {dailyWeatherArray.map((weatherDay) => {
+            const weekday = convertUnixToWeekday(weatherDay.dt);
+            const minTemp = Math.round(weatherDay.temp.min);
+            const maxTemp = Math.round(weatherDay.temp.max);
+            const icon = findDailyForecastIcon(
+              weatherDay.weather[0].main.toLowerCase()
+            );
+
+            return (
+              <div key={weekday} className="single-day-container">
+                <span>{weekday}</span>
+                <img src={icon} alt="weather-icon" />
+                <div className="weekday-temp">
+                  <span>{minTemp}º</span>
+                  <span>{maxTemp}º</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </>
+  );
+};

@@ -1,0 +1,32 @@
+.button-container {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  display: flex;
+}
+
+.toggle-button {
+  background: rgba(252, 241, 241, 0.85);
+  border: 0.5px black solid;
+  padding: 8px;
+  height: 6vh;
+  width: 3vw;
+}
+
+.toggle-button:hover,
+.toggle-button.farenheit.active,
+.toggle-button.celsius.active {
+  background: rgba(252, 241, 241, 1);
+}
+.toggle-button:active {
+  background: rgb(194, 177, 177);
+}
+
+.toggle-button.farenheit {
+  border-right: 0.25px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.toggle-button.celsius {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
