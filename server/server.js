@@ -38,36 +38,35 @@ app.get("/", (req, res) => {
 });
 
 app.post("/search-location", (req, res) => {
-  console.log("This is a request body", req.body);
-  let zipCode = req.body.zipCodeInput;
-  const baseUrl = "http://api.openweathermap.org/data/2.5/weather?zip=";
-  const apiKey = `&appid=${process.env.WEATHER_KEY}&units=imperial`;
-  apiUrl = baseUrl + zipCode + apiKey;
-  console.log("apiUrl is aiosudhiasuhdiaus" + apiUrl);
+  const zipCode = req.body.zipCodeInput;
+  const unit = req.body.unit;
+
+  const apiKey = `&appid=${process.env.WEATHER_KEY}`;
+  const unitsFormat = `&units=${unit}`;
+  const baseUrl1 = "http://api.openweathermap.org/data/2.5/weather?zip=";
+  const baseUrl2 = "https://api.openweathermap.org/data/2.5/onecall?";
+  const part = "minutely,alerts";
+  const apiUrl1 = baseUrl1 + zipCode + apiKey + unitsFormat;
   axios
-    .get(apiUrl)
-    .then((response) => {
-      res.json(response.data);
+    .get(apiUrl1)
+    .then((currentWeatherResponse) => {
+      const coordinates = currentWeatherResponse.data.coord;
+      const coord = `lat=${coordinates.lat}&lon=${coordinates.lon}&exclude=${part}`;
+      const apiUrl2 = baseUrl2 + coord + apiKey + unitsFormat;
+
+      axios.get(apiUrl2).then((forecastResponse) => {
+        const allData = {
+          currentWeatherData: currentWeatherResponse.data,
+          forecastData: forecastResponse.data,
+        };
+        res.json(allData);
+      });
     })
     .catch((error) => {
       console.log("error is " + error);
     });
 });
 
-app.get("/weather", (req, res) => {
-  axios
-    .get(apiUrl)
-    .then((response) => {
-      res.json(response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-      console.log("search location error");
-    });
-});
-
 app.listen(port, () => {
   console.log(`App running on port ${port} `);
 });
-
-let apiUrl;
