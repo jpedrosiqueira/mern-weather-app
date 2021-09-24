@@ -95,7 +95,9 @@ class WeatherApp extends React.Component {
 
   // Fetch from API when the temperature unit changes
   fetchNewTemperatures = () => {
-    this.fetchWeatherData(this.state.cityName).then(() => {
+    // First, encode city name in case it includes special characters
+    const cityNameEncoded = encodeURIComponent(this.state.cityName);
+    this.fetchWeatherData(cityNameEncoded).then(() => {
       const forecastData = this.state.forecastData;
       this.setState({
         currentTemp: forecastData.current.temp,
@@ -119,12 +121,28 @@ class WeatherApp extends React.Component {
   };
 
   render() {
-    const isDynamicForecastBackground = isDarkForecastBg(this.state.background);
-    const isDynamicTextColor = isDarkTextColorBg(this.state.background);
+    const {
+      background,
+      isCurrentlyDay,
+      cityName,
+      currentTemp,
+      weatherDescription,
+      highTemp,
+      lowTemp,
+      allHourlyWeather,
+      currentTime,
+      sunsetTime,
+      sunriseTime,
+      timezone,
+      allDailyWeather,
+    } = this.state;
+
+    const isDynamicForecastBackground = isDarkForecastBg(background);
+    const isDynamicTextColor = isDarkTextColorBg(background);
 
     // Set the app background based on the current weather
     let backgroundStyle = {
-      backgroundImage: `url(${this.state.background}`,
+      backgroundImage: `url(${background}`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       minHeight: "100vh",
@@ -141,42 +159,39 @@ class WeatherApp extends React.Component {
             </div>
             <div className="day-night-icon">
               <IsDayOrNightIcon
-                isCurrentlyDay={this.state.isCurrentlyDay}
+                isCurrentlyDay={isCurrentlyDay}
                 hasDarkBgClass={isDynamicTextColor}
               />
             </div>
           </div>
           <div className="city-name">
-            <CityName
-              name={this.state.cityName}
-              hasDarkBgClass={isDynamicTextColor}
-            />
+            <CityName name={cityName} hasDarkBgClass={isDynamicTextColor} />
           </div>
           <div className="temp-hourlyforecast-container">
             <div className="current-temp">
               <CurrentTemp
-                temperature={this.state.currentTemp}
-                weatherDescription={this.state.weatherDescription}
+                temperature={currentTemp}
+                weatherDescription={weatherDescription}
                 hasDarkBgClass={isDynamicTextColor}
-                high={this.state.highTemp}
-                low={this.state.lowTemp}
+                high={highTemp}
+                low={lowTemp}
               />
             </div>
             <div className="hourly-forecast">
               <HourlyForecast
-                allHourlyWeatherArray={this.state.allHourlyWeather}
+                allHourlyWeatherArray={allHourlyWeather}
                 hasDarkBgClass={isDynamicForecastBackground}
-                currTemp={this.state.currentTemp}
-                currentTime={this.state.currentTime}
-                sunset={this.state.sunsetTime}
-                sunrise={this.state.sunriseTime}
-                timezone={this.state.timezone}
+                currTemp={currentTemp}
+                currentTime={currentTime}
+                sunset={sunsetTime}
+                sunrise={sunriseTime}
+                timezone={timezone}
               />
             </div>
           </div>
           <div className="daily-forecast">
             <DailyForecast
-              allDailyWeatherArray={this.state.allDailyWeather}
+              allDailyWeatherArray={allDailyWeather}
               hasDarkBgClass={isDynamicForecastBackground}
             />
           </div>
