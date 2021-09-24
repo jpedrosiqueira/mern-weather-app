@@ -1,5 +1,4 @@
 .search-bar-input {
-  width: 80%;
   border: none;
   outline: none;
   background: rgba(252, 241, 241, 0.6);
@@ -7,7 +6,7 @@
   right: 35.76%;
   border-radius: 32px;
   height: 40px;
-  width: 676px;
+  width: 54vw;
   font-family: "Noto Sans", sans-serif;
   font-style: normal;
   font-weight: normal;

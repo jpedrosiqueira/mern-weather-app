@@ -127,6 +127,7 @@ class WeatherApp extends React.Component {
       backgroundImage: `url(${this.state.background}`,
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
+      minHeight: "100vh",
     };
     return (
       <div style={backgroundStyle}>
@@ -145,21 +146,13 @@ class WeatherApp extends React.Component {
               />
             </div>
           </div>
-          <div className="city-dailyforecast-content">
-            <div className="city-name">
-              <CityName
-                name={this.state.cityName}
-                hasDarkBgClass={isDynamicTextColor}
-              />
-            </div>
-            <div className="daily-forecast">
-              <DailyForecast
-                allDailyWeatherArray={this.state.allDailyWeather}
-                hasDarkBgClass={isDynamicForecastBackground}
-              />
-            </div>
+          <div className="city-name">
+            <CityName
+              name={this.state.cityName}
+              hasDarkBgClass={isDynamicTextColor}
+            />
           </div>
-          <div className="temp-hourlyforecast-content">
+          <div className="temp-hourlyforecast-container">
             <div className="current-temp">
               <CurrentTemp
                 temperature={this.state.currentTemp}
@@ -180,6 +173,12 @@ class WeatherApp extends React.Component {
                 timezone={this.state.timezone}
               />
             </div>
+          </div>
+          <div className="daily-forecast">
+            <DailyForecast
+              allDailyWeatherArray={this.state.allDailyWeather}
+              hasDarkBgClass={isDynamicForecastBackground}
+            />
           </div>
         </div>
       </div>

@@ -7,8 +7,9 @@
   background: rgba(252, 241, 241, 0.85);
   border: 0.5px black solid;
   padding: 8px;
-  height: 6vh;
+  height: 40px;
   width: 3vw;
+  min-width: min-content;
 }
 
 .toggle-button:hover,
