@@ -17,8 +17,8 @@ export const ToggleUnit = ({ changeUnit }) => {
       <button
         onClick={handleClick}
         value="imperial"
-        label="farenheit"
-        className={`toggle-button farenheit ${
+        label="fahrenheit"
+        className={`toggle-button fahrenheit ${
           isActive === "imperial" && "active"
         }`}
       >

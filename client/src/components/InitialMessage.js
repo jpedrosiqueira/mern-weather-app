@@ -15,7 +15,7 @@ export const InitialMessage = () => {
       <li>Next 6 hours forecast, according to location timezone location</li>
       <li>Day/Night indicator icon on the top right corner</li>
       <li>Dynamic backgrounds depending on the current city weather</li>
-      <li>Toggle button to display temperatures in Farenheit or Celsius</li>
+      <li>Toggle button to display temperatures in Fahrenheit or Celsius</li>
     </div>
   );
 };

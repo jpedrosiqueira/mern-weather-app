@@ -4,6 +4,14 @@ import "../styles/hourly-forecast.css";
 import { WeatherAssets } from "./WeatherAssets";
 import { isDay } from "./DayNightIndicator";
 
+// The time fetched from API is in Unix time, here we convert
+// it to an hour format like "3 PM", considering the Timezone.
+export const convertUnixToHourWithTimezone = (unixTime, timezone) => {
+  if (timezone) {
+    return moment.unix(unixTime).tz(timezone).format("hA");
+  }
+};
+
 export const HourlyForecast = ({
   allHourlyWeatherArray,
   hasDarkBgClass,
@@ -14,14 +22,6 @@ export const HourlyForecast = ({
 }) => {
   // we are only interested in the first 6 hours of the weather array
   const hourlyWeatherArray = allHourlyWeatherArray.slice(0, 6);
-
-  // The time fetched from API is in Unix time, here we convert
-  // it to an hour format like "3 PM", considering the Timezone.
-  const convertUnixToHourWithTimezone = (unixTime) => {
-    if (timezone) {
-      return moment.unix(unixTime).tz(timezone).format("hA");
-    }
-  };
 
   // Finds what weather icon to use based on the weather description fetched from API.
   // For the hourly forecast icon, we care about each hour, because icons
@@ -64,7 +64,7 @@ export const HourlyForecast = ({
               temp = Math.round(currTemp);
               hour = "Now";
             } else {
-              hour = convertUnixToHourWithTimezone(hourlyWeather.dt);
+              hour = convertUnixToHourWithTimezone(hourlyWeather.dt, timezone);
             }
 
             return (

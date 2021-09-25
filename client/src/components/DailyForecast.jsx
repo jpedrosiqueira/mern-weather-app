@@ -4,16 +4,16 @@ import "../styles/daily-forecast.css";
 import { findDailyForecastIcon } from "./WeatherAssets";
 import { InitialMessage } from "./InitialMessage";
 
+// The time fetched from API is in Unix time, here we convert
+// it to a weekday format like "Monday"
+export const convertUnixToWeekday = (unixTime) => {
+  return moment.unix(unixTime).format("dddd");
+};
+
 export const DailyForecast = ({ allDailyWeatherArray, hasDarkBgClass }) => {
   // We only care about the 6 next days forecast,
   // excluding the first index which is today.
   const dailyWeatherArray = allDailyWeatherArray.slice(1, 7);
-
-  // The time fetched from API is in Unix time, here we convert
-  // it to a weekday format like "Monday"
-  const convertUnixToWeekday = (unixTime) => {
-    return moment.unix(unixTime).format("dddd");
-  };
 
   return (
     <>

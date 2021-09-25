@@ -8,7 +8,9 @@ export const SearchBar = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(inputField);
+    // Only passes the input value to onSubmit if
+    // it's not an empty string
+    inputField && onSubmit(inputField);
     setInputField("");
   };
 
@@ -18,7 +20,7 @@ export const SearchBar = ({ onSubmit }) => {
 
   return (
     <div className="search-bar-container">
-      <form onSubmit={handleSubmit}>
+      <form data-testid="form" onSubmit={handleSubmit}>
         <input
           onChange={onChange}
           type="text"

@@ -13,7 +13,7 @@
 }
 
 .toggle-button:hover,
-.toggle-button.farenheit.active,
+.toggle-button.fahrenheit.active,
 .toggle-button.celsius.active {
   background: rgba(252, 241, 241, 1);
 }
@@ -21,7 +21,7 @@
   background: rgb(194, 177, 177);
 }
 
-.toggle-button.farenheit {
+.toggle-button.fahrenheit {
   border-right: 0.25px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;

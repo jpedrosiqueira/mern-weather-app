@@ -14,11 +14,12 @@ export const isDay = (time, sunset, sunrise) => {
 
 export const IsDayOrNightIcon = ({ isCurrentlyDay, hasDarkBgClass }) => {
   const icon = isCurrentlyDay ? SunIcon : MoonIcon;
+  const dayOrNight = isCurrentlyDay ? "day" : "night";
 
   return (
     <img
       src={icon}
-      alt="day-night-icon"
+      alt={`${dayOrNight}-icon`}
       className={`${hasDarkBgClass && "dark"}`}
     />
   );
