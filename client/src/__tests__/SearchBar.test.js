@@ -1,13 +1,14 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { SearchBar } from "../components/Searchbar";
+import { ErrorMessage } from "../components/ErrorMessage";
 
 describe("Search bar input", () => {
-  it("Should handle when user submits a city name", () => {
+  it("Should handle when user submits an empty string", () => {
     const handleSubmit = jest.fn();
     const { getByTestId } = render(<SearchBar onSubmit={handleSubmit} />);
     fireEvent.submit(getByTestId("form"));
 
-    expect(handleSubmit).toHaveBeenCalled();
+    expect(handleSubmit).not.toHaveBeenCalled();
   });
 
   it("Should handle when user types a city name", () => {
@@ -25,5 +26,14 @@ describe("Search bar input", () => {
     fireEvent.submit(getByTestId("form"));
     expect(searchInput.value).toBe("");
   });
-  //   it("Should display error message if city can not be found", () => {});
+
+  it("Should display error message if city can not be found", () => {
+    render(<ErrorMessage displayMsg={true} />);
+
+    expect(
+      screen.getByText(
+        "Sorry, could not find location. Please type a valid city name."
+      )
+    ).toBeVisible();
+  });
 });
