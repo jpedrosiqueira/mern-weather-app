@@ -190,6 +190,7 @@ class WeatherApp extends React.Component {
             <div className="hourly-forecast">
               <HourlyForecast
                 allHourlyWeatherArray={allHourlyWeather}
+                weatherDescription={weatherDescription}
                 hasDarkBgClass={isDynamicForecastBackground}
                 currTemp={currentTemp}
                 currentTime={currentTime}

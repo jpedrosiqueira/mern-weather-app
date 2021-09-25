@@ -15,6 +15,7 @@ export const convertUnixToHourWithTimezone = (unixTime, timezone) => {
 
 export const HourlyForecast = ({
   allHourlyWeatherArray,
+  weatherDescription,
   hasDarkBgClass,
   currTemp,
   timezone,
@@ -27,12 +28,12 @@ export const HourlyForecast = ({
   // Finds what weather icon to use based on the weather description fetched from API.
   // For the hourly forecast icon, we care about each hour, because icons
   // can change dynamically based on if it will be day or night at that time.
-  const findHourlyForecastIcon = (hourlyWeather) => {
+  const findHourlyForecastIcon = (hourlyWeather, hourlyWeatherDescription) => {
     let weatherIcon;
     const hourlyTime = hourlyWeather.dt;
-    const weatherDescription = hourlyWeather.weather[0].main.toLowerCase();
-    if (weatherDescription in WeatherAssets) {
-      if (weatherDescription === "clear") {
+    hourlyWeatherDescription = hourlyWeatherDescription.toLowerCase();
+    if (hourlyWeatherDescription in WeatherAssets) {
+      if (hourlyWeatherDescription === "clear") {
         // For the "clear" icon, we can have a night icon and a day icon.
         // For every hour step, check if it's day or night,
         // so we can render the proper icon.
@@ -40,7 +41,7 @@ export const HourlyForecast = ({
           ? WeatherAssets.clear.icon.day
           : WeatherAssets.clear.icon.night;
       } else {
-        weatherIcon = WeatherAssets[weatherDescription].icon;
+        weatherIcon = WeatherAssets[hourlyWeatherDescription].icon;
       }
     } else {
       weatherIcon = WeatherAssets.other.icon;
@@ -57,16 +58,24 @@ export const HourlyForecast = ({
         >
           {hourlyWeatherArray.map((hourlyWeather, idx) => {
             let hour;
-            const icon = findHourlyForecastIcon(hourlyWeather);
+            let hourlyWeatherDescription;
             let temp = Math.round(hourlyWeather.temp);
 
             if (idx === 0) {
-              // For the first hour displayed, show the current temperature fetched
+              // For the first hour displayed, show the current temperature and current weather description fetched
               temp = Math.round(currTemp);
+              hourlyWeatherDescription = weatherDescription;
+
               hour = "Now";
             } else {
               hour = convertUnixToHourWithTimezone(hourlyWeather.dt, timezone);
+              hourlyWeatherDescription =
+                hourlyWeather.weather[0].main.toLowerCase();
             }
+            const icon = findHourlyForecastIcon(
+              hourlyWeather,
+              hourlyWeatherDescription
+            );
 
             return (
               <div key={idx} className="single-hour-container">
