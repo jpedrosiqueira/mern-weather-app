@@ -41,6 +41,7 @@ router.post("/search-location", (req, res) => {
     })
     .catch((error) => {
       console.log("error is " + error);
+      res.send(error);
     });
 });
 

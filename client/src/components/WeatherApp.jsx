@@ -14,6 +14,7 @@ import {
 import SnowBg from "../assets/backgrounds/snow.jpeg";
 import { isDay, IsDayOrNightIcon } from "./DayNightIndicator";
 import { ToggleUnit } from "./ToggleUnit";
+import { ErrorMessage } from "./ErrorMessage";
 
 class WeatherApp extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class WeatherApp extends React.Component {
       currentTime: 0,
       isCurrentlyDay: true,
       timezone: "",
+      displayErrorMsg: false,
     };
   }
 
@@ -41,56 +43,60 @@ class WeatherApp extends React.Component {
   fetchWeatherData = async (searchbarInput) => {
     const body = { cityName: searchbarInput, unit: this.state.unit };
 
-    await axios
-      .post("/search-location", body)
-      .then((res) => {
-        console.log("this is the response", res);
+    await axios.post("/search-location", body).then((res) => {
+      console.log("this is the response", res);
 
-        // We only need city name, high temperature and low from
-        // the currentWeather data fetched
-        const currentWeatherData = res.data.currentWeatherData;
+      // We only need city name, high temperature and low from
+      // the currentWeather data fetched
+      const currentWeatherData = res.data.currentWeatherData;
 
-        this.setState({
-          cityName: currentWeatherData.name,
-          highTemp: currentWeatherData.main.temp_max,
-          lowTemp: currentWeatherData.main.temp_min,
-          forecastData: res.data.forecastData,
-        });
-      })
-      .catch((err) => console.log(err.response.data));
+      this.setState({
+        cityName: currentWeatherData.name,
+        highTemp: currentWeatherData.main.temp_max,
+        lowTemp: currentWeatherData.main.temp_min,
+        forecastData: res.data.forecastData,
+        displayErrorMsg: false,
+      });
+    });
   };
 
   // On submit, fetch our data based on the input.
   handleSubmit = (searchbarInput) => {
-    this.fetchWeatherData(searchbarInput).then(() => {
-      const forecastData = this.state.forecastData;
-      this.setState({
-        currentTemp: forecastData.current.temp,
-        weatherDescription: forecastData.current.weather[0].main,
-        allHourlyWeather: forecastData.hourly,
-        allDailyWeather: forecastData.daily,
-        sunriseTime: forecastData.current.sunrise,
-        sunsetTime: forecastData.current.sunset,
-        currentTime: forecastData.current.dt,
-        timezone: forecastData.timezone,
+    this.fetchWeatherData(searchbarInput)
+      .then(() => {
+        const forecastData = this.state.forecastData;
+        this.setState({
+          currentTemp: forecastData.current.temp,
+          weatherDescription: forecastData.current.weather[0].main,
+          allHourlyWeather: forecastData.hourly,
+          allDailyWeather: forecastData.daily,
+          sunriseTime: forecastData.current.sunrise,
+          sunsetTime: forecastData.current.sunset,
+          currentTime: forecastData.current.dt,
+          timezone: forecastData.timezone,
+        });
+        // After some information from state has been set,
+        // set more information based on those.
+        this.setState({
+          inputField: searchbarInput,
+          isCurrentlyDay: isDay(
+            this.state.currentTime,
+            this.state.sunsetTime,
+            this.state.sunriseTime
+          ),
+        });
+        this.setState({
+          background: findBackgroundImg(
+            this.state.weatherDescription.toLowerCase(),
+            this.state.isCurrentlyDay
+          ),
+        });
+      })
+      .catch(() => {
+        this.setState({
+          displayErrorMsg: true,
+        });
       });
-      // After some information from state has been set,
-      // set more information based on those.
-      this.setState({
-        inputField: searchbarInput,
-        isCurrentlyDay: isDay(
-          this.state.currentTime,
-          this.state.sunsetTime,
-          this.state.sunriseTime
-        ),
-      });
-      this.setState({
-        background: findBackgroundImg(
-          this.state.weatherDescription.toLowerCase(),
-          this.state.isCurrentlyDay
-        ),
-      });
-    });
   };
 
   // Fetch from API when the temperature unit changes
@@ -135,6 +141,7 @@ class WeatherApp extends React.Component {
       sunriseTime,
       timezone,
       allDailyWeather,
+      displayErrorMsg,
     } = this.state;
 
     const isDynamicForecastBackground = isDarkForecastBg(background);
@@ -153,6 +160,9 @@ class WeatherApp extends React.Component {
           <div className="header-container">
             <div className="search-bar">
               <SearchBar onSubmit={this.handleSubmit} />
+            </div>
+            <div className="error-message-container">
+              <ErrorMessage displayMsg={displayErrorMsg} />
             </div>
             <div className="toggle-button-container">
               <ToggleUnit changeUnit={this.handleChangeUnit} />

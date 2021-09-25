@@ -14,12 +14,20 @@
 .header-container {
   display: grid;
   grid-template-columns: 2.2fr 0.4fr 0.4fr;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 35%;
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas: "search-bar toggle-button-container day-night-icon";
+  grid-template-areas:
+    "search-bar toggle-button-container day-night-icon"
+    "error-message-container . .";
   grid-area: header-container;
   align-items: center;
+}
+
+.error-message-container {
+  grid-area: error-message-container;
+  width: 70%;
+  text-align: center;
 }
 
 .search-bar {
@@ -76,7 +84,7 @@
   .container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 15vh 10vh 1.5fr 1.2fr;
+    grid-template-rows: 25vh 10vh 1.5fr 1.2fr;
     gap: 0px 0px;
     grid-auto-flow: row;
     grid-template-areas:
@@ -90,11 +98,18 @@
     grid-area: header-container;
     display: grid;
     margin-top: 4%;
+    gap: 3vh;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas:
       "search-bar search-bar search-bar toggle-button-container"
+      "error-message-container error-message-container error-message-container error-message-container"
       ". . . day-night-icon";
+  }
+
+  .error-message-container {
+    grid-area: error-message-container;
+    width: 100%;
   }
 
   .search-bar {
