@@ -3,6 +3,7 @@ import moment from "moment-timezone";
 import "../styles/hourly-forecast.css";
 import { WeatherAssets } from "./WeatherAssets";
 import { isDay } from "./DayNightIndicator";
+import { MyInfo } from "./MyInfo";
 
 // The time fetched from API is in Unix time, here we convert
 // it to an hour format like "3 PM", considering the Timezone.
@@ -77,7 +78,8 @@ export const HourlyForecast = ({
           })}
         </div>
       ) : (
-        <div></div>
+        // Display my contact info on greeting page.
+        <MyInfo />
       )}
     </>
   );
