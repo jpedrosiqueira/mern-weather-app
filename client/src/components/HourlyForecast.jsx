@@ -31,7 +31,8 @@ export const HourlyForecast = ({
   const findHourlyForecastIcon = (hourlyWeather, hourlyWeatherDescription) => {
     let weatherIcon;
     const hourlyTime = hourlyWeather.dt;
-    hourlyWeatherDescription = hourlyWeatherDescription.toLowerCase();
+    hourlyWeatherDescription &&
+      (hourlyWeatherDescription = hourlyWeatherDescription.toLowerCase());
     if (hourlyWeatherDescription in WeatherAssets) {
       if (hourlyWeatherDescription === "clear") {
         // For the "clear" icon, we can have a night icon and a day icon.
