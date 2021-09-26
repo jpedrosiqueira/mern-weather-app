@@ -22,7 +22,9 @@ This project was created by Pedro Siqueira, as an assignment for Palmetto Solar.
 3. Run on command line `npm run dev`
 4. Have fun checking the weather!
 
-Note: to run tests, run `npm test` inside client folder.
+Testing: to run tests, run `npm test` inside client folder.
+
+**Note:** If there's an issue with babel-jest when running `npm run dev`, then you should create a `.env` file inside `/client` folder and add `SKIP_PREFLIGHT_CHECK=true`. Save the file and try running again.
 
 ### Figma Design
 
