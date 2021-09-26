@@ -44,8 +44,6 @@ class WeatherApp extends React.Component {
     const body = { cityName: searchbarInput, unit: this.state.unit };
 
     await axios.post("/search-location", body).then((res) => {
-      console.log("this is the response", res);
-
       // We only need city name, high temperature and low from
       // the currentWeather data fetched
       const currentWeatherData = res.data.currentWeatherData;

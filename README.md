@@ -22,6 +22,8 @@ This project was created by Pedro Siqueira, as an assignment for Palmetto Solar.
 3. Run on command line `npm run dev`
 4. Have fun checking the weather!
 
+Note: to run tests, run `npm test` inside client folder.
+
 ### Figma Design
 
 This project design was sketched using Figma.<br>
