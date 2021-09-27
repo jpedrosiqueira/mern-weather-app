@@ -1,6 +1,9 @@
 # Weather App
 
 A dynamic weather app that displays current weather information, as well as hourly and daily forecast.
+<br><br>
+![Desktop](/client/src/assets/screenshots/desktop-screenshot.png?raw=true)
+<br>
 
 ## Description
 
@@ -32,9 +35,6 @@ This project design was sketched using Figma.<br>
 [Link to Figma file](https://www.figma.com/file/Lxukrvy2KmXP6AjWVDbFgF/WeatherApp?node-id=635%3A489)
 
 ### Screenshots
-
-On Desktop: <br>
-![Desktop](/client/src/assets/screenshots/desktop-screenshot.png?raw=true)
 
 On Mobile: <br>
 ![Mobile](/client/src/assets/screenshots/mobile-screenshot.png?raw=true)
