@@ -101,14 +101,15 @@ class WeatherApp extends React.Component {
   fetchNewTemperatures = () => {
     // First, encode city name in case it includes special characters
     const cityNameEncoded = encodeURIComponent(this.state.cityName);
-    this.fetchWeatherData(cityNameEncoded).then(() => {
-      const forecastData = this.state.forecastData;
-      this.setState({
-        currentTemp: forecastData.current.temp,
-        allHourlyWeather: forecastData.hourly,
-        allDailyWeather: forecastData.daily,
+    this.state.cityName !== "Winterfell" &&
+      this.fetchWeatherData(cityNameEncoded).then(() => {
+        const forecastData = this.state.forecastData;
+        this.setState({
+          currentTemp: forecastData.current.temp,
+          allHourlyWeather: forecastData.hourly,
+          allDailyWeather: forecastData.daily,
+        });
       });
-    });
   };
 
   handleChangeUnit = (unitSelected) => {
