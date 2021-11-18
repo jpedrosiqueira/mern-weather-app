@@ -10,13 +10,17 @@ export const convertUnixToWeekday = (unixTime) => {
   return moment.unix(unixTime).format("dddd");
 };
 
-export const DailyForecast = ({ allDailyWeatherArray, hasDarkBgClass }) => {
+export const DailyForecast = ({
+  className,
+  allDailyWeatherArray,
+  hasDarkBgClass,
+}) => {
   // We only care about the 6 next days forecast,
   // excluding the first index which is today.
   const dailyWeatherArray = allDailyWeatherArray.slice(1, 7);
 
   return (
-    <>
+    <div className={className}>
       {allDailyWeatherArray.length ? (
         <div className={`daily-forecast-container ${hasDarkBgClass && "dark"}`}>
           {dailyWeatherArray.map((weatherDay) => {
@@ -43,6 +47,6 @@ export const DailyForecast = ({ allDailyWeatherArray, hasDarkBgClass }) => {
         // Show initial message if there is no forecast to display
         <InitialMessage />
       )}
-    </>
+    </div>
   );
 };

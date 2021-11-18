@@ -157,54 +157,52 @@ class WeatherApp extends React.Component {
       <div style={backgroundStyle}>
         <div className="container">
           <div className="header-container">
-            <div className="search-bar">
-              <SearchBar onSubmit={this.handleSubmit} />
-            </div>
-            <div className="error-message-container">
-              <ErrorMessage displayMsg={displayErrorMsg} />
-            </div>
-            <div className="toggle-button-container">
-              <ToggleUnit changeUnit={this.handleChangeUnit} />
-            </div>
-            <div className="day-night-icon">
-              <IsDayOrNightIcon
-                isCurrentlyDay={isCurrentlyDay}
-                hasDarkBgClass={isDynamicTextColor}
-              />
-            </div>
-          </div>
-          <div className="city-name">
-            <CityName name={cityName} hasDarkBgClass={isDynamicTextColor} />
-          </div>
-          <div className="temp-hourlyforecast-container">
-            <div className="current-temp">
-              <CurrentTemp
-                temperature={currentTemp}
-                weatherDescription={weatherDescription}
-                hasDarkBgClass={isDynamicTextColor}
-                high={highTemp}
-                low={lowTemp}
-              />
-            </div>
-            <div className="hourly-forecast">
-              <HourlyForecast
-                allHourlyWeatherArray={allHourlyWeather}
-                weatherDescription={weatherDescription}
-                hasDarkBgClass={isDynamicForecastBackground}
-                currTemp={currentTemp}
-                currentTime={currentTime}
-                sunset={sunsetTime}
-                sunrise={sunriseTime}
-                timezone={timezone}
-              />
-            </div>
-          </div>
-          <div className="daily-forecast">
-            <DailyForecast
-              allDailyWeatherArray={allDailyWeather}
-              hasDarkBgClass={isDynamicForecastBackground}
+            <SearchBar className="search-bar" onSubmit={this.handleSubmit} />
+            <ErrorMessage
+              className="error-message-container"
+              displayMsg={displayErrorMsg}
+            />
+            <ToggleUnit
+              className="toggle-button-container"
+              changeUnit={this.handleChangeUnit}
+            />
+            <IsDayOrNightIcon
+              className="day-night-icon"
+              isCurrentlyDay={isCurrentlyDay}
+              hasDarkBgClass={isDynamicTextColor}
             />
           </div>
+          <CityName
+            className="city-name"
+            name={cityName}
+            hasDarkBgClass={isDynamicTextColor}
+          />
+          <div className="temp-hourlyforecast-container">
+            <CurrentTemp
+              className="current-temp"
+              temperature={currentTemp}
+              weatherDescription={weatherDescription}
+              hasDarkBgClass={isDynamicTextColor}
+              high={highTemp}
+              low={lowTemp}
+            />
+            <HourlyForecast
+              className="hourly-forecast"
+              allHourlyWeatherArray={allHourlyWeather}
+              weatherDescription={weatherDescription}
+              hasDarkBgClass={isDynamicForecastBackground}
+              currTemp={currentTemp}
+              currentTime={currentTime}
+              sunset={sunsetTime}
+              sunrise={sunriseTime}
+              timezone={timezone}
+            />
+          </div>
+          <DailyForecast
+            className="daily-forecast"
+            allDailyWeatherArray={allDailyWeather}
+            hasDarkBgClass={isDynamicForecastBackground}
+          />
         </div>
       </div>
     );

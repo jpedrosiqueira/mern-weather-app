@@ -14,6 +14,7 @@ export const convertUnixToHourWithTimezone = (unixTime, timezone) => {
 };
 
 export const HourlyForecast = ({
+  className,
   allHourlyWeatherArray,
   weatherDescription,
   hasDarkBgClass,
@@ -51,7 +52,7 @@ export const HourlyForecast = ({
   };
 
   return (
-    <>
+    <div className={className}>
       {/* Only render hourly forecast if there is data to display */}
       {allHourlyWeatherArray.length ? (
         <div
@@ -91,6 +92,6 @@ export const HourlyForecast = ({
         // Display my contact info on greeting page.
         <MyInfo />
       )}
-    </>
+    </div>
   );
 };

@@ -3,7 +3,7 @@ import "../styles/searchbar.css";
 
 // This component will use React Hooks as opposed to
 // React Class Components, only to show some diversity.
-export const SearchBar = ({ onSubmit }) => {
+export const SearchBar = ({ className, onSubmit }) => {
   const [inputField, setInputField] = useState("");
 
   const handleSubmit = (e) => {
@@ -19,7 +19,7 @@ export const SearchBar = ({ onSubmit }) => {
   };
 
   return (
-    <div className="search-bar-container">
+    <div className={className}>
       <form data-testid="form" onSubmit={handleSubmit}>
         <input
           onChange={onChange}
