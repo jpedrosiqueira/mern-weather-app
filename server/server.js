@@ -6,7 +6,7 @@ const searchLocationRoute = require("./routes/api/searchLocation");
 
 app.use(cors());
 app.use(express.json());
-let port = 5000;
+let port = process.env.PORT || 5000;
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
