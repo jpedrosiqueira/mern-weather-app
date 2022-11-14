@@ -6,7 +6,7 @@ import "../styles/initial-message.css";
 export const InitialMessage = () => {
   return (
     <div className="initial-message-container">
-      <h3> Weather App</h3>
+      <h3> Weatherfy App</h3>
 
       <p>Please start by typing in a city name.</p>
       <p>Features:</p>
