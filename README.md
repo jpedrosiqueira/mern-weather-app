@@ -1,13 +1,14 @@
-# Weather App
+# Weatherfy App
 
-A dynamic weather app that displays current weather information, as well as hourly and daily forecast.
+A dynamic weather app that displays current weather information, as well as hourly and daily forecast.<br>
+[Link to live website](https://dynamic-weather-forecast.herokuapp.com/)
 <br><br>
 ![Desktop](/client/src/assets/screenshots/desktop-screenshot.png?raw=true)
 <br>
 
 ## Description
 
-This project was created by Pedro Siqueira, as an assignment for Palmetto Solar.
+This project was created by Pedro Siqueira.
 
 ### Features
 
@@ -17,17 +18,6 @@ This project was created by Pedro Siqueira, as an assignment for Palmetto Solar.
 - Displays forecast for the next six days, showing the weekday, weather description icon for that day, as well as high and low temperatures.
 - Icon that indicates if it is currently day or night, located on the top right of the page.
 - Button that toggles units between Fahrenheit(default) and Celsius.
-
-## How to run the app
-
-1. On root of project, enter client folder with `cd client`, and run `npm install`
-2. Exit client folder with `cd ..`, and run `npm install` on root folder.
-3. Run on command line `npm run dev`
-4. Have fun checking the weather!
-
-Testing: to run tests, run `npm test` inside client folder.
-
-**Note:** If there's an issue with babel-jest when running `npm run dev`, then you should create a `.env` file inside `/client` folder and add `SKIP_PREFLIGHT_CHECK=true`. Save the file and try running again.
 
 ### Figma Design
 
