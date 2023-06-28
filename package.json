@@ -26,6 +26,7 @@
   "devDependencies": {
     "concurrently": "^6.2.1",
     "babel-loader": "8.0.6",
+    "webpack": "4.41.5",
     "netlify-lambda": "^2.0.16",
     "nodemon": "^2.0.12"
   }
