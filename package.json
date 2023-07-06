@@ -7,7 +7,7 @@
     "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "cd client && npm run start",
-    "build:functions": "netlify-lambda build functions",
+    "build:functions": "netlify-build build functions",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "keywords": [],
@@ -24,10 +24,10 @@
     "mongoose": "^6.0.5"
   },
   "devDependencies": {
-    "concurrently": "^6.2.1",
+    "@netlify/build": "^29.15.1",
     "babel-loader": "8.0.6",
-    "webpack": "4.41.5",
-    "netlify-lambda": "^2.0.16",
-    "nodemon": "^2.0.12"
+    "concurrently": "^6.2.1",
+    "nodemon": "^2.0.12",
+    "webpack": "4.41.5"
   }
 }

@@ -43,7 +43,7 @@ class WeatherApp extends React.Component {
   fetchWeatherData = async (searchbarInput) => {
     const body = { cityName: searchbarInput, unit: this.state.unit };
 
-    await axios.post("/search-location", body).then((res) => {
+    await axios.post("/.netlify/functions/searchLocation", body).then((res) => {
       // We only need city name, high temperature and low from
       // the currentWeather data fetched
       const currentWeatherData = res.data.currentWeatherData;

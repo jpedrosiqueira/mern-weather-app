@@ -26,3 +26,5 @@ yarn-error.log*
 
 # visual studios configurations
 .vs
+# Local Netlify folder
+.netlify
