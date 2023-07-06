@@ -7,7 +7,7 @@ export const MyInfo = () => {
       <div>This web app was created by Pedro Siqueira.</div>
       <div className="social-links">
         <a
-          href="https://github.com/jpedrosiq"
+          href="https://github.com/jpedrosiqueira"
           target="_blank"
           rel="noopener noreferrer"
         >
